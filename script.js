@@ -42,11 +42,10 @@ function flipCards() {
         c.classList.remove('flip-out');
         c.classList.add('flip-in');
 
-        if (guessCards[0] === c) {
+
+        if (c.innerHTML) {
             return;
         }
-
-
 
         guess.push(c.style.backgroundColor);
         guessCards.push(c);
@@ -55,12 +54,14 @@ function flipCards() {
         let guess2 = guess[1];
 
         if (c.style.backgroundColor === guess1 && guess2) {
+            guessCards.forEach(card => card.innerHTML = ".")
             guess = []
             guessCards = [];
             scoreCount++;
         } else if (c.style.backgroundColor !== guess1 && guess2) {
             setTimeout(function () {
                 guessCards.forEach((gcard) => gcard.classList.add("normal-bgc"));
+                guessCards.forEach((gcard) => gcard.classList.remove("flip-in"));
                 guessCards.forEach((gcard) => gcard.classList.add("flip-out"));
                 guess = [];
                 guessCards = []
@@ -71,6 +72,7 @@ function flipCards() {
         if (scoreCount === 15) {
             alert("you win");
         }
+
 
     }))
 }

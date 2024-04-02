@@ -65,6 +65,7 @@ h1 {
     perspective: 1000px;
     transition: 800ms;
     transform: rotateY(180deg);
+    font-size: 0;
 }
 
 .flip-out {
