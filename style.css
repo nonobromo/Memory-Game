@@ -1,8 +1,15 @@
+:root {
+    --z-index-front: 2;
+    --z-index-back: 1;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+
 
 body {
     overflow: hidden;
@@ -57,21 +64,31 @@ h1 {
     background-size: fixed !important;
     background-position: center !important;
     background-color: #FFF2D8 !important;
+    font-size: 0;
+    text-align: center;
 }
-
 
 
 .flip-in {
     perspective: 1000px;
     transition: 800ms;
     transform: rotateY(180deg);
-    font-size: 0;
+    pointer-events: none;
+    background-color: lightgreen;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 120px;
+    /* z-index: var(--z-index-back); */
 }
 
 .flip-out {
     perspective: 1000px;
     transition: 800ms;
     transform: rotateY(360deg);
+    text-align: center;
+    vertical-align: middle;
+    line-height: 240px;
+    /* z-index: var(--z-index-front); */
 }
 
 .btn>button {

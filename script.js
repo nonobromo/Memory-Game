@@ -21,8 +21,8 @@ const cards = document.querySelectorAll(".card");
 function shuffleCards() {
 
     for (let i = 0; i < pairs.length; i++) {
-        let randomColor = colors[Math.floor(Math.random() * colors.length)];
-        pairs[i].forEach((pair) => cards[pair].style.backgroundColor = randomColor);
+        let randomColor = emojis[Math.floor(Math.random() * emojis.length)];
+        pairs[i].forEach((pair) => cards[pair].innerHTML = randomColor);
     }
 }
 
@@ -41,25 +41,23 @@ function flipCards() {
         c.classList.remove("normal-bgc")
         c.classList.remove('flip-out');
         c.classList.add('flip-in');
+        c.style.fontSize = "36px";
 
 
-        if (c.innerHTML) {
-            return;
-        }
 
-        guess.push(c.style.backgroundColor);
+        guess.push(c.innerHTML);
         guessCards.push(c);
 
         let guess1 = guess[0];
         let guess2 = guess[1];
 
-        if (c.style.backgroundColor === guess1 && guess2) {
-            guessCards.forEach(card => card.innerHTML = ".")
+        if (c.innerHTML === guess1 && guess2) {
             guess = []
             guessCards = [];
             scoreCount++;
-        } else if (c.style.backgroundColor !== guess1 && guess2) {
+        } else if (c.innerHTML !== guess1 && guess2) {
             setTimeout(function () {
+                guessCards.forEach((gcard) => gcard.style.fontSize = "0")
                 guessCards.forEach((gcard) => gcard.classList.add("normal-bgc"));
                 guessCards.forEach((gcard) => gcard.classList.remove("flip-in"));
                 guessCards.forEach((gcard) => gcard.classList.add("flip-out"));
@@ -85,5 +83,6 @@ btnReset.addEventListener("click", function () {
     cards.forEach((gcard) => gcard.classList.add("flip-out"));
     cards.forEach((gcard) => gcard.classList.remove("flip-in"));
     cards.forEach((gcard) => gcard.classList.add("normal-bgc"));
+    cards.forEach((gcard) => gcard.style.fontSize = "0px");
     shuffleCards();
 })
