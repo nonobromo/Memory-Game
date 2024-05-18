@@ -14,18 +14,18 @@ function createCards() {
 
 createCards()
 
-// const pairs = [[0, 29], [1, 10], [12, 21], [13, 23], [9, 18], [5, 24], [4, 14], [2, 26], [19, 20], [25, 27], [22, 28], [6, 15], [7, 16], [8, 17], [3, 11]];
+
 
 const cards = document.querySelectorAll(".card");
 
 function shuffleCards() {
 
-    for (let i = 0; i < randomArrPick.length; i++) {
+    for (let i = 0; i < pairsArray.length; i++) {
         let randomColor = emojis[Math.floor(Math.random() * emojis.length)];
-        randomArrPick[i].forEach((pair) => cards[pair].innerHTML = randomColor);
+        pairsArray[i].forEach((pair) => cards[pair].innerHTML = randomColor);
     }
 }
-
+shuffleArray()
 shuffleCards();
 
 cards.forEach((card) => card.classList.add("normal-bgc"));
@@ -66,24 +66,42 @@ function flipCards() {
             }, 1000)
 
         }
-
         if (scoreCount === 15) {
-            alert("you win");
+            setTimeout(gameOver, 500)
         }
-
-
     }))
 }
 
 flipCards();
 
+const gameAlert = document.querySelector(".game-alert");
+
+
+function gameOver() {
+
+    setTimeout(() => {
+        gameAlert.style.transform = "translateY(0px)";
+        gameAlert.style.transition = "400ms"
+    }, 10)
+
+    setTimeout(() => {
+        gameAlert.style.transform = "translateY(-20px)";
+        gameAlert.style.transition = "400ms"
+    }, 3000)
+
+}
+
+
+
 const btnReset = document.getElementById("btn-reset");
 
 btnReset.addEventListener("click", function () {
+    pairsArray = [];
+    shuffleArray()
+    shuffleCards();
     cards.forEach((gcard) => gcard.classList.add("flip-out"));
     cards.forEach((gcard) => gcard.classList.remove("flip-in"));
     cards.forEach((gcard) => gcard.classList.add("normal-bgc"));
     cards.forEach((gcard) => gcard.style.fontSize = "0px");
-    shuffleCards();
     scoreCount = 0;
 })
