@@ -1,5 +1,5 @@
 const board = document.querySelector("#board");
-let isGameRunning = false;
+let isGameRunning;
 
 let scoreCount = 0
 
@@ -37,39 +37,44 @@ let guessCards = [];
 
 
 function flipCards() {
-    cards.forEach((c) => c.addEventListener("click", function () {
-        c.classList.remove("normal-bgc")
-        c.classList.remove('flip-out');
-        c.classList.add('flip-in');
-        c.style.fontSize = "36px";
+    if (!isGameRunning) {
+        return
+    } else {
+        cards.forEach((c) => c.addEventListener("click", function () {
+            c.classList.remove("normal-bgc")
+            c.classList.remove('flip-out');
+            c.classList.add('flip-in');
+            c.style.fontSize = "36px";
 
 
 
-        guess.push(c.innerHTML);
-        guessCards.push(c);
+            guess.push(c.innerHTML);
+            guessCards.push(c);
 
-        let guess1 = guess[0];
-        let guess2 = guess[1];
+            let guess1 = guess[0];
+            let guess2 = guess[1];
 
-        if (c.innerHTML === guess1 && guess2) {
-            guess = []
-            guessCards = [];
-            scoreCount++;
-        } else if (c.innerHTML !== guess1 && guess2) {
-            setTimeout(function () {
-                guessCards.forEach((gcard) => gcard.style.fontSize = "0")
-                guessCards.forEach((gcard) => gcard.classList.add("normal-bgc"));
-                guessCards.forEach((gcard) => gcard.classList.remove("flip-in"));
-                guessCards.forEach((gcard) => gcard.classList.add("flip-out"));
-                guess = [];
-                guessCards = []
-            }, 1000)
+            if (c.innerHTML === guess1 && guess2) {
+                guess = []
+                guessCards = [];
+                scoreCount++;
+            } else if (c.innerHTML !== guess1 && guess2) {
+                setTimeout(function () {
+                    guessCards.forEach((gcard) => gcard.style.fontSize = "0")
+                    guessCards.forEach((gcard) => gcard.classList.add("normal-bgc"));
+                    guessCards.forEach((gcard) => gcard.classList.remove("flip-in"));
+                    guessCards.forEach((gcard) => gcard.classList.add("flip-out"));
+                    guess = [];
+                    guessCards = []
+                }, 1000)
 
-        }
-        if (scoreCount === 15) {
-            setTimeout(gameOver, 500)
-        }
-    }))
+            }
+            if (scoreCount === 15) {
+                setTimeout(gameOver, 500)
+                isGameRunning = false;
+            }
+        }))
+    }
 }
 
 flipCards();
@@ -81,12 +86,12 @@ function gameOver() {
 
     setTimeout(() => {
         gameAlert.style.transform = "translateY(0px)";
-        gameAlert.style.transition = "400ms"
+        gameAlert.style.transition = "400ms";
     }, 10)
 
     setTimeout(() => {
         gameAlert.style.transform = "translateY(-20px)";
-        gameAlert.style.transition = "400ms"
+        gameAlert.style.transition = "400ms";
     }, 3000)
 
 }
@@ -104,4 +109,5 @@ btnReset.addEventListener("click", function () {
     cards.forEach((gcard) => gcard.classList.add("normal-bgc"));
     cards.forEach((gcard) => gcard.style.fontSize = "0px");
     scoreCount = 0;
+    isGameRunning = true;
 })
