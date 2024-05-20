@@ -1,4 +1,5 @@
 const board = document.querySelector("#board");
+const gameAlert = document.querySelector(".game-alert");
 let isGameRunning;
 
 let scoreCount = 0
@@ -66,12 +67,16 @@ function flipCards() {
                     guessCards.forEach((gcard) => gcard.classList.add("flip-out"));
                     guess = [];
                     guessCards = []
+                    gameAlert.textContent = "No Matched Pair";
+                    setTimeout(gameOver, 100)
                 }, 1000)
 
             }
             if (scoreCount === 10) {
+                gameAlert.textContent = "Congratulations! You beat the Puzzle";
                 setTimeout(gameOver, 500)
                 isGameRunning = false;
+
             }
         }))
     }
@@ -79,7 +84,7 @@ function flipCards() {
 
 flipCards();
 
-const gameAlert = document.querySelector(".game-alert");
+
 
 
 function gameOver() {
@@ -92,7 +97,7 @@ function gameOver() {
     setTimeout(() => {
         gameAlert.style.transform = "translateY(-20px)";
         gameAlert.style.transition = "400ms";
-    }, 3000)
+    }, 2000)
 
 }
 
