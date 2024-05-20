@@ -5,7 +5,7 @@ let scoreCount = 0
 
 function createCards() {
     isGameRunning = true;
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 20; i++) {
         const cardDiv = document.createElement("div");
         cardDiv.classList.add("card");
         board.appendChild(cardDiv);
@@ -69,7 +69,7 @@ function flipCards() {
                 }, 1000)
 
             }
-            if (scoreCount === 15) {
+            if (scoreCount === 10) {
                 setTimeout(gameOver, 500)
                 isGameRunning = false;
             }

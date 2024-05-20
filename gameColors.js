@@ -8,14 +8,14 @@ const emojis = [
 let pairsArray = [];
 function shuffleArray() {
 
-    let cardArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29];
+    let cardArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 
     for (let i = cardArr.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [cardArr[i], cardArr[j]] = [cardArr[j], cardArr[i]];
     }
 
-    for (let i = 0; i < 30; i += 2) {
+    for (let i = 0; i < 20; i += 2) {
         pairsArray.push([cardArr[i], cardArr[i + 1]]);
     }
 
